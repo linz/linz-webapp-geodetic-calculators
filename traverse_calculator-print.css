@@ -1,0 +1,9 @@
+.printonly
+{
+    display: inline;
+}
+
+.noprint, input
+{
+    display: none;
+}

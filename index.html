@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Traverse calculator</title>
+        <script src="jquery-3.2.1.min.js"></script>
+        <script src="traverse_calculator.js"></script>
+        <link rel="stylesheet" href="traverse_calculator.css"></link>
+        <link rel="stylesheet" media="print" href="traverse_calculator-print.css"></link>
+    </head>
+    <body>
+        <h1>Traverse calculator</h1>
+        <table>
+            <tr class="traverse_header">
+                <th></th>
+                <th>Bearing</th>
+                <th>Distance</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>East</th>
+                <th>North</th>
+            </tr>
+            <tr class="obs_template data">
+                <td class="code"></td>
+                <td class="bearing"><input type="text" size="9" /> 
+                    <span class="printonly print_bear"></span> </td>
+                <td class="distance"><input type="text" size="9" /> 
+                    <span class="printonly print_dist"></span> </td>
+                <td class="addrow_button"><input tabindex="-1" type="submit" value="+" /></td>
+                <td class="droprow_button"><input tabindex="-1" type="submit" value="-" /></td>
+                <td class="reverse_button"><input tabindex="-1" type="submit" value="&#x21c6;" /></td>
+                <td class="east results"></td>
+                <td class="north results"></td>
+                <td></td>
+            <tr class="spacer"><td></td></tr>
+            <tr class="misclose">
+                <td>Misclose</td>
+                <td class="bearing results"><input type="text" width="9" /> </td>
+                <td class="distance results"><input type="text" width="9" /> </td>
+                <td colspan="3" class="rf results"></td>
+                <td class="east results"></td>
+                <td class="north results"></td>
+                <td></td>
+            </tr>
+            </tr>
+        </table>
+        <div class="spacer"></div>
+        <input id="resetbutton" type="submit" value="Reset form" />
+    </body>
+</html>
