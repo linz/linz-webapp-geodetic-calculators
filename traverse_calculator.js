@@ -120,13 +120,13 @@ LINZ.tcobs.prototype.bearing=function()
         belement.removeClass("error");
         return null;
     }
-    var re=/^(\d{1,3})(?:\.([0-5]\d|60)(?:\.?([0-5]\d|60))?|\s+([0-5]\d|60)(?:\s+([0-5]\d|60))?)$/;
+    var re=/^(\d{1,3})(?:\.([0-5]\d|60)(?:\.?([0-5]\d|60))?|\s+([0-5]\d|60)(?:\s+([0-5]\d|60))?)?$/;
     var match;
     var bearing=null;
     if( match=btext.match(re) )
     {
         var deg=parseInt(match[1]);
-        var min=parseInt(match[2] || match[4]);
+        var min=parseInt(match[2] || match[4] || '0');
         var sec=parseInt(match[3] || match[5] || '0');
         if( deg < 360 )
         {
