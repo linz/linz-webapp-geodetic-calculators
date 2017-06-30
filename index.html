@@ -8,43 +8,107 @@
         <link rel="stylesheet" media="print" href="traverse_calculator-print.css"></link>
     </head>
     <body>
-        <h1>Traverse calculator</h1>
+        <div class="calculator">
+        <h1><input class="title" id="title" value="Traverse calculator" size="32" /></h1>
+        <div class="noprint">
+            <p>Closed traverse? <input id="isclosed" type="checkbox" checked="1" />
+        </div>
         <table>
-            <tr class="traverse_header">
+            <tr class="traverse_header" border="1">
                 <th></th>
                 <th>Bearing</th>
+                <td></td>
                 <th>Distance</th>
                 <th></th>
-                <th></th>
-                <th></th>
+                <th>&#x0394;E</th>
+                <th>&#x0394;N</th>
+                <th class="bowditch">&#x0394;E corr</th>
+                <th class="bowditch">&#x0394;N corr</th>
                 <th>East</th>
                 <th>North</th>
             </tr>
+            <tr id="start_coord">
+                <td>Start</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="bowditch"></td>
+                <td class="bowditch"></td>
+                <td class="coord">
+                    <input id="start_e" class="endpoint" type="text" size="12" value="0.00" /> 
+                    <span id="print_start_e" class="printonly"></span> 
+                </td>
+                <td class="coord">
+                    <input id="start_n" class="endpoint" type="text" size="12" value="0.00" /> 
+                    <span id="print_start_n" class="printonly"></span> 
+                </td>
+            </tr>
+            <tr class="spacer"><td></td></tr>
             <tr class="obs_template data">
                 <td class="code"></td>
-                <td class="bearing"><input type="text" size="9" /> 
-                    <span class="printonly print_bear"></span> </td>
-                <td class="distance"><input type="text" size="9" /> 
-                    <span class="printonly print_dist"></span> </td>
-                <td class="addrow_button"><input tabindex="-1" type="submit" value="+" /></td>
-                <td class="droprow_button"><input tabindex="-1" type="submit" value="-" /></td>
-                <td class="reverse_button"><input tabindex="-1" type="submit" value="&#x21c6;" /></td>
-                <td class="east results"></td>
-                <td class="north results"></td>
-                <td></td>
-            <tr class="spacer"><td></td></tr>
-            <tr class="misclose">
-                <td>Misclose</td>
-                <td class="bearing results"><input type="text" width="9" /> </td>
-                <td class="distance results"><input type="text" width="9" /> </td>
-                <td colspan="3" class="rf results"></td>
-                <td class="east results"></td>
-                <td class="north results"></td>
-                <td></td>
+                <td>
+                    <input class="bearing" type="text" size="9" /> 
+                    <span class="printonly print_bear"></span> 
+                </td>
+                <td class="buttons"><input class="reverse_button" tabindex="-1" type="submit" value="&#x21c6;" /></td>
+                <td>
+                    <input class="distance" type="text" size="9" /> 
+                    <span class="printonly print_dist"></span> 
+                </td>
+                <td class="buttons">
+                    <input class="addrow_button" tabindex="-1" type="submit" value="+" />
+                    <input class="droprow_button" tabindex="-1" type="submit" value="-" />
+                </td>
+                <td class="deast dcoord results"></td>
+                <td class="dnorth dcoord results"></td>
+                <td class="bcdeast bowditch dcoord results"></td>
+                <td class="bcdnorth bowditch dcoord results"></td>
+                <td class="east coord results"></td>
+                <td class="north coord results"></td>
             </tr>
+            <tr id="end_coord">
+                <td>End</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="bowditch"></td>
+                <td class="bowditch"></td>
+                <td>
+                    <input id="end_e" class="endpoint" type="text" size="12" value="0.00" /> 
+                    <span id="print_end_e" class="printonly"></span> 
+                </td>
+                <td>
+                    <input id="end_n" class="endpoint" type="text" size="12" value="0.00" /> 
+                    <span id="print_end_n" class="printonly"></span> 
+                </td>
+            </tr>
+            <tr class="spacer"><td></td></tr>
+            <tr id="misclose">
+                <td>Misclose</td>
+                <td id="misclose_bearing" class="bearing results"><input type="text" width="9" /> </td>
+                <td></td>
+                <td id="misclose_distance" class="distance results"><input type="text" width="9" /> </td>
+                <td id="misclose_rf" class="coord results"></td>
+                <td id="misclose_e" class="coord results"></td>
+                <td id="misclose_n" class="coord results"></td>
+                <td class="bowditch"></td>
+                <td class="bowditch"></td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
+        </div>
+        <div class="area">
+            Total area <span id="total_area"/></span> m&#x00B2;
+        </div>
         <div class="spacer"></div>
+        <input id="closebutton" type="submit" value="Close traverse" />
         <input id="resetbutton" type="submit" value="Reset form" />
     </body>
 </html>

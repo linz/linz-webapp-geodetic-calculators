@@ -7,3 +7,9 @@
 {
     display: none;
 }
+
+h1 input
+{
+    display: inline;
+    border: none;
+}
