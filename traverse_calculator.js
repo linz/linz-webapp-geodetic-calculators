@@ -97,7 +97,7 @@ LINZ.tctotal.prototype.miscloseDistance=function()
 {
     var de=this.e-this.e1;
     var dn=this.n-this.n1;
-    return Math.hypot(de,dn);
+    return Math.sqrt(de*de+dn*dn);
 }
 
 LINZ.tctotal.prototype.miscloseRf=function( bearing, distance )
@@ -250,7 +250,7 @@ LINZ.tcobs.prototype.clearResults=function()
     this.element.find(".results").text("");
 }
 
-LINZ.tcobs.prototype.calcobs=function( total, show=1 )
+LINZ.tcobs.prototype.calcobs=function( total, show )
 {
     var bearing=this.bearing;
     var distance=this.distance;
