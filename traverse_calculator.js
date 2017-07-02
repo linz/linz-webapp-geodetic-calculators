@@ -368,6 +368,7 @@ LINZ.tccalc.prototype.reset=function()
 {
     $(".obs_data").remove();
     $(".results").text("");
+    $(".endpoint").val("0.00");
     $(".bowditch").hide();
     $("div.area").hide();
     var calc=this;
