@@ -335,6 +335,8 @@ LINZ.tcobs.prototype.isblank=function()
 LINZ.tccalc=function()
 {
     var calc=this;
+    $("#help").hide();
+    $("input.showhelp").click(function(){calc.showHelp();});
     $("#resetbutton").click(function(){calc.reset();});
     $("#closebutton").click(function(){ calc.calc(true); });
     $("#end_coord").hide();
@@ -358,6 +360,18 @@ LINZ.tccalc=function()
 LINZ.tccalc.prototype.isClosedTraverse=function()
 {
     return $("#isclosed").prop("checked");
+}
+
+LINZ.tccalc.prototype.showHelp=function()
+{
+    if( $("#help").is(":visible") ) 
+    {
+        $("#help").hide();
+    }
+    else
+    {
+        $("#help").show();
+    }
 }
 
 LINZ.tccalc.prototype.addRow=function()

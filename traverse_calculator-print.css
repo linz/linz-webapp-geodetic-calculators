@@ -8,7 +8,13 @@
     display: none;
 }
 
-h1 input
+div.title
+{
+    width: 100%;
+    text-align: center;
+}
+
+input#title
 {
     display: inline;
     border: none;

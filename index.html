@@ -9,11 +9,72 @@
         <link rel="stylesheet" media="print" href="traverse_calculator-print.css"></link>
     </head>
     <body>
-        <div class="calculator">
-        <h1><input class="title input_data" id="title" value="Traverse calculator" size="32" /></h1>
-        <div class="noprint">
-            <p>Traverse closes back to start point? <input id="isclosed" type="checkbox" checked="1" />
+        <div id="help" class="noprint help">
+            <h1 class="noprint">Traverse calculator</h1>
+            <p>
+            Use the calculator to calculate miscloses of survey traverse data.  The calculator
+            treats all distances and bearings as applying in a plane projection.  Distances are
+            in metres and bearings in degrees.
+            </p>
+            <p>
+            The traverse can either close back to a start point, or run between two known
+            coordinates.  The calculator uses the Bowditch method to distribute the 
+            misclose along the traverse.  If it closes back to a start point then after
+            running the Bowditch adjustment it will calculate the enclosed area.  The 
+            area is calculated in square metres, and is a projection area - it is not
+            corrected to the ellipsoid.
+            </p>
+            <p>
+            The title at the top of the page may be overwritten to something more
+            meaningful - this will be used if the calculations are printed out.
+            </p>
+            <h2>Angle format</h2>
+            <p>
+            Bearings can be entered as degrees, degrees and minutes, 
+            or degrees minutes and seconds.  These can be formatted separated by spaces
+            or using the traditional calculator format of entering minutes and seconds
+            after the point.  Minutes and seconds must be entered with two digits, 
+            &quot;08&quot; is valid but &quot;8&quot; is not. Examples of valid angle
+            formats are:
+            </p>
+            <table class="list">
+                <tr><td>132</td></tr>
+                <tr><td>132 02</td></tr>
+                <tr><td>132 02 30</td></tr>
+                <tr><td>132.02</td></tr>
+                <tr><td>132.0230</td></tr>
+            </table>
+            <p>
+            If a bearing or distance is entered incorrectly it will be highlighted 
+            <span class="error nowrap">123 2 30</span>.  Rows with incorrect data are
+            not used in the traverse calculation.
+            </p>
+            <h2>Short cut keys</h2>
+            <p>
+            When entering distances and bearings then hitting the 'b' key will calculate
+            the Bowditch adjustment, and hitting the 'r' key will reset the form for another
+            calculation.
+            </p>
+            <p>
+            The buttons on the form are:
+            </p>
+            <table class="list">
+                <tr><td><input tabindex="-1" type="button" value="&#x21c6;" /></td><td>Reverse the bearing</td></tr>
+                <tr><td><input tabindex="-1" type="button" value="+" /></td><td>Add a new row beneath the current row</td></tr>
+                <tr><td><input tabindex="-1" type="button" value="-" /></td><td>Remove the current row</td></tr>
+            </table>
+            <hr />
         </div>
+        <div class="calculator">
+            <div class="title">
+            <span class="noprint">Title: </span><input class="title input_data" id="title" value="Traverse calculator" size="32" />
+            </div>
+        </div>
+        <div class="vspacer" />
+        <div class="noprint">
+            Traverse closes back to start point? <input id="isclosed" type="checkbox" checked="1" />
+        </div>
+        <div class="vspacer" />
         <table>
             <tr class="traverse_header" border="1">
                 <th></th>
@@ -54,14 +115,14 @@
                     <input class="input_data bearing" type="text" size="9" /> 
                     <span class="printonly print_bear"></span> 
                 </td>
-                <td class="buttons"><input class="reverse_button" tabindex="-1" type="submit" value="&#x21c6;" /></td>
+                <td class="buttons"><input class="reverse_button" tabindex="-1" type="button" value="&#x21c6;" /></td>
                 <td>
                     <input class="input_data distance" type="text" size="9" /> 
                     <span class="printonly print_dist"></span> 
                 </td>
                 <td class="buttons">
-                    <input class="addrow_button" tabindex="-1" type="submit" value="+" />
-                    <input class="droprow_button" tabindex="-1" type="submit" value="-" />
+                    <input class="addrow_button" tabindex="-1" type="button" value="+" />
+                    <input class="droprow_button" tabindex="-1" type="button" value="-" />
                 </td>
                 <td class="dnorth dcoord results"></td>
                 <td class="deast dcoord results"></td>
@@ -111,5 +172,6 @@
         <div class="spacer"></div>
         <input id="closebutton" type="submit" value="Run Bowditch adjustment of misclose" />
         <input id="resetbutton" type="submit" value="Reset form" />
+        <input class="showhelp" type="submit" value="Help" />
     </body>
 </html>

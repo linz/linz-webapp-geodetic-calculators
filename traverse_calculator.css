@@ -4,15 +4,20 @@ div.calculator
     display: inline-block;
 }
 
-h1
+h1, div.title
 {
     text-align: center;
 }
 
-h1 input
+div.title, input.title
 {
     font-size: 18pt;
     text-align: center;
+}
+
+div.vspacer
+{
+    padding-top: 10pt;
 }
 
 .obs_template
@@ -35,9 +40,14 @@ td, th, input
     text-align: right;
 }
 
-td.buttons
+td.buttons, table.list td
 {
     text-align: left;
+}
+
+table.list td
+{
+    padding-left: 2em;
 }
 
 
