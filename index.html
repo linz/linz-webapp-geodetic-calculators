@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="calculator">
-        <h1><input class="title" id="title" value="Traverse calculator" size="32" /></h1>
+        <h1><input class="title input_data" id="title" value="Traverse calculator" size="32" /></h1>
         <div class="noprint">
             <p>Traverse closes back to start point? <input id="isclosed" type="checkbox" checked="1" />
         </div>
@@ -39,11 +39,11 @@
                 <td class="bowditch"></td>
                 <td class="bowditch"></td>
                 <td class="coord">
-                    <input id="start_n" class="endpoint" type="text" size="12" value="0.00" /> 
+                    <input id="start_n" class="input_data endpoint" type="text" size="12" value="0.00" /> 
                     <span id="print_start_n" class="printonly"></span> 
                 </td>
                 <td class="coord">
-                    <input id="start_e" class="endpoint" type="text" size="12" value="0.00" /> 
+                    <input id="start_e" class="input_data endpoint" type="text" size="12" value="0.00" /> 
                     <span id="print_start_e" class="printonly"></span> 
                 </td>
             </tr>
@@ -51,12 +51,12 @@
             <tr class="obs_template data">
                 <td class="code"></td>
                 <td>
-                    <input class="bearing" type="text" size="9" /> 
+                    <input class="input_data bearing" type="text" size="9" /> 
                     <span class="printonly print_bear"></span> 
                 </td>
                 <td class="buttons"><input class="reverse_button" tabindex="-1" type="submit" value="&#x21c6;" /></td>
                 <td>
-                    <input class="distance" type="text" size="9" /> 
+                    <input class="input_data distance" type="text" size="9" /> 
                     <span class="printonly print_dist"></span> 
                 </td>
                 <td class="buttons">
@@ -81,11 +81,11 @@
                 <td class="bowditch"></td>
                 <td class="bowditch"></td>
                 <td>
-                    <input id="end_n" class="endpoint" type="text" size="12" value="0.00" /> 
+                    <input id="end_n" class="input_data endpoint" type="text" size="12" value="0.00" /> 
                     <span id="print_end_n" class="printonly"></span> 
                 </td>
                 <td>
-                    <input id="end_e" class="endpoint" type="text" size="12" value="0.00" /> 
+                    <input id="end_e" class="input_data endpoint" type="text" size="12" value="0.00" /> 
                     <span id="print_end_e" class="printonly"></span> 
                 </td>
             </tr>

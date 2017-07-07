@@ -143,6 +143,49 @@ LINZ.tcvalid.number=function(el,printel,ndp,dflt)
     return value;
 }
 
+// calc is the calculator, used to handle Alt key events
+// func is a function to call to ensure that the readxxx
+// functions have been called if on an observation element
+
+LINZ.tcvalid.setKeypressHandler=function(element,calc,func)
+{
+    element.find(".input_data").keypress(function(e){
+        if( e.which == 13 )
+        {
+            var inputs=$(".input_data:visible");
+            var idx=inputs.index(this);
+            if( idx >= 0 && idx < inputs.length-1 )
+            {
+                inputs[idx+1].focus();
+            }
+        }});
+    element.find(".endpoint,.distance,.bearing").keypress(function(e){
+        // Handle b and r keys here as need to prevent default behaviour
+        if( e.which == 66 || e.which == 98 )
+        {
+            if( func !== undefined ) func();
+            calc.calc(true);
+            event.preventDefault();
+        }
+        if( e.which == 82 || e.which == 114 )
+        {
+            calc.reset();
+            event.preventDefault();
+        }
+        if( ! e.ctrlKey && ! e.altKey && ! e.metaKey ) 
+        {
+            if( $.inArray(e.which,[32,46,48,49,50,51,52,53,54,55,56,57]) < 0)
+            {
+                e.preventDefault();
+            }
+            if( e.keyCode == 32 && ! $(this).hasClass("bearing"))
+            {
+                e.preventDefault();
+            }
+        }
+    });
+}
+
 //===========================================================
 
 LINZ.tcobs=function( prev_el, calc )
@@ -175,6 +218,11 @@ LINZ.tcobs=function( prev_el, calc )
     tcel.find(".distance").focusout(function(){ 
         obs.distance=obs.readDistance();
         calc.calc(); 
+        });
+    LINZ.tcvalid.setKeypressHandler(tcel,calc,function(){ 
+        obs.bearing=obs.readBearing();
+        obs.distance=obs.readDistance();
+        calc.calc();
         });
     tcel.insertAfter(prev_el);
     return tcel;
@@ -302,6 +350,8 @@ LINZ.tccalc=function()
         calc.calc();
         });
     $(".endpoint").focusout(function(){ calc.calc(); });
+    $(".input_data").focusin(function(){ this.select(); });
+    LINZ.tcvalid.setKeypressHandler($(".calculator"),calc);
     this.reset();
 }
 
@@ -375,6 +425,7 @@ LINZ.tccalc.prototype.reset=function()
     var startobs=new LINZ.tcobs($(".obs_template"),calc);
     var drop=startobs.find(".droprow_button");
     drop.remove();
+    $("#title").focus();
 }
 
 //===========================================================
