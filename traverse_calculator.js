@@ -259,7 +259,7 @@ LINZ.tcobs.prototype.readBearing=function()
         belement.removeClass("error");
         return undefined;
     }
-    var re=/^(\d{1,3})(?:\.([0-5]\d|60)(?:\.?([0-5]\d|60))?|\s+([0-5]\d|60)(?:\s+([0-5]\d|60))?)?$/;
+    var re=/^(\d{1,3})(?:\.([0-5]\d)(?:\.?([0-5]\d))?|\s+([0-5]\d)(?:\s+([0-5]\d))?)?$/;
     var match;
     var bearing=undefined;
     if( match=btext.match(re) )
@@ -335,7 +335,7 @@ LINZ.tcobs.prototype.isblank=function()
 LINZ.tccalc=function()
 {
     var calc=this;
-    $("#resetbutton").click(this.reset);
+    $("#resetbutton").click(function(){calc.reset();});
     $("#closebutton").click(function(){ calc.calc(true); });
     $("#end_coord").hide();
     $("#isclosed").click(function(){
@@ -425,7 +425,9 @@ LINZ.tccalc.prototype.reset=function()
     var startobs=new LINZ.tcobs($(".obs_template"),calc);
     var drop=startobs.find(".droprow_button");
     drop.remove();
+    $("#title").val("Traverse calculator")
     $("#title").focus();
+    $("#title").select();
 }
 
 //===========================================================
