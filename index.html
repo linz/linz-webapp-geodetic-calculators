@@ -9,8 +9,9 @@
         <link rel="stylesheet" media="print" href="traverse_calculator-print.css"></link>
     </head>
     <body>
-        <div id="help" class="noprint help">
-            <h1 class="noprint">Traverse calculator</h1>
+        <div id="help" class="help">
+            <input type="button" class="closehelp noprint" tabindex="-1" value="Close" />
+            <h1>Traverse calculator</h1>
             <p>
             Use the calculator to calculate miscloses of survey traverse data.  The calculator
             treats all distances and bearings as applying in a plane projection.  Distances are
@@ -26,7 +27,7 @@
             </p>
             <p>
             The title at the top of the page may be overwritten to something more
-            meaningful - this will be used if the calculations are printed out.
+            meaningful - this will be if the traverse is printed.
             </p>
             <h2>Angle format</h2>
             <p>
@@ -45,8 +46,8 @@
                 <tr><td>132.0230</td></tr>
             </table>
             <p>
-            If a bearing or distance is entered incorrectly it will be highlighted 
-            <span class="error nowrap">123 2 30</span>.  Rows with incorrect data are
+            If a bearing or distance is entered incorrectly it will be highlighted, for example 
+            <span class="error bearing">123 2 30</span>.  Rows with incorrect data are
             not used in the traverse calculation.
             </p>
             <h2>Short cut keys</h2>
@@ -63,20 +64,18 @@
                 <tr><td><input tabindex="-1" type="button" value="+" /></td><td>Add a new row beneath the current row</td></tr>
                 <tr><td><input tabindex="-1" type="button" value="-" /></td><td>Remove the current row</td></tr>
             </table>
-            <hr />
         </div>
         <div class="calculator">
             <div class="title">
             <span class="noprint">Title: </span><input class="title input_data" id="title" value="Traverse calculator" size="32" />
             </div>
-        </div>
-        <div class="vspacer" />
+        <div class="vspacer"></div>
         <div class="noprint">
             Traverse closes back to start point? <input id="isclosed" type="checkbox" checked="1" />
         </div>
-        <div class="vspacer" />
+        <div class="vspacer"></div>
         <table>
-            <tr class="traverse_header" border="1">
+            <tr class="traverse_header">
                 <th></th>
                 <th>Bearing</th>
                 <td></td>
@@ -153,9 +152,9 @@
             <tr class="spacer"><td></td></tr>
             <tr id="misclose">
                 <td>Misclose</td>
-                <td id="misclose_bearing" class="bearing results"><input type="text" width="9" /> </td>
+                <td id="misclose_bearing" class="bearing results"></td>
                 <td></td>
-                <td id="misclose_distance" class="distance results"><input type="text" width="9" /> </td>
+                <td id="misclose_distance" class="distance results"></td>
                 <td id="misclose_rf" class="coord results"></td>
                 <td id="misclose_n" class="coord results"></td>
                 <td id="misclose_e" class="coord results"></td>
@@ -170,8 +169,10 @@
             Projection area <span id="total_area"/></span> m&#x00B2;
         </div>
         <div class="spacer"></div>
+        <div class="noprint">
         <input id="closebutton" type="submit" value="Run Bowditch adjustment of misclose" />
         <input id="resetbutton" type="submit" value="Reset form" />
         <input class="showhelp" type="submit" value="Help" />
+        </div>
     </body>
 </html>

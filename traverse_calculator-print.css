@@ -3,19 +3,24 @@
     display: inline;
 }
 
-.noprint, input
+.noprint, input.input_data, td.buttons input
 {
     display: none;
+}
+
+input#title
+{
+    width: 100%;
+    display: inline;
+    text-align: center;
 }
 
 div.title
 {
     width: 100%;
-    text-align: center;
 }
 
 input#title
 {
-    display: inline;
     border: none;
 }

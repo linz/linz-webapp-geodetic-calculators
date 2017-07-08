@@ -35,6 +35,11 @@ div.vspacer
     display: none;
 }
 
+.coord, .bowditch, .distance, .bearing
+{
+    white-space: nowrap;
+}
+
 td, th, input
 {
     text-align: right;
@@ -76,3 +81,24 @@ table tr#misclose
 {
     height: 5px;
 }
+
+div#help
+{
+    background-color: #EEE;
+    padding: 15px;
+    margin-bottom: 15px;
+    font-family: sans-serif;
+    font-size: 14px;
+    
+}
+
+div.title
+{
+    width: 100%;
+}
+
+input.closehelp
+{
+    float: right;
+}
+

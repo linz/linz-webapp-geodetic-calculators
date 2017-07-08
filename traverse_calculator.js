@@ -337,6 +337,7 @@ LINZ.tccalc=function()
     var calc=this;
     $("#help").hide();
     $("input.showhelp").click(function(){calc.showHelp();});
+    $("input.closehelp").click(function(){$("#help").hide();});
     $("#resetbutton").click(function(){calc.reset();});
     $("#closebutton").click(function(){ calc.calc(true); });
     $("#end_coord").hide();
