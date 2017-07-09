@@ -30,6 +30,11 @@ div.vspacer
     background-color: yellow;
 }
 
+.distance.links:not(.error)
+{
+    background-color: cyan;
+}
+
 .printonly
 {
     display: none;
@@ -48,6 +53,11 @@ td, th, input
 td.buttons, table.list td
 {
     text-align: left;
+}
+
+td.buttons
+{
+    white-space: nowrap;
 }
 
 table.list td

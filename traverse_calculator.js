@@ -8,7 +8,8 @@ config=
     'dist_ndp': 2,
     'en_ndp': 2,
     'area_ndp': 2,
-    'max_rf': 1000000
+    'max_rf': 1000000,
+    'link_to_metre': 0.201168
 };
 
 LINZ.tctotal=function(e,n)
@@ -119,7 +120,7 @@ LINZ.tctotal.prototype.totalArea=function( bearing, distance )
 
 LINZ.tcvalid={};
 
-LINZ.tcvalid.number=function(el,printel,ndp,dflt)
+LINZ.tcvalid.number=function(el,printel,ndp,dflt,factor)
 {
     var re=/^(\d+(?:\.\d{1,3})?)$/;
     var match;
@@ -133,6 +134,7 @@ LINZ.tcvalid.number=function(el,printel,ndp,dflt)
     if( match=dtext.match(re) )
     {
         value=parseFloat(dtext);
+        if( factor !== undefined ) value *= factor;
         if(printel) printel.text(value.toFixed(ndp));
         el.removeClass("error");
     }
@@ -160,10 +162,12 @@ LINZ.tcvalid.setKeypressHandler=function(element,calc,func)
             }
         }});
     element.find(".endpoint,.distance,.bearing").keypress(function(e){
-        // Handle b and r keys here as need to prevent default behaviour
+        // Handle b, r, l, m keys here as need to prevent default behaviour
+        var obs=element.data('obs');
         if( e.which == 66 || e.which == 98 )
         {
-            if( func !== undefined ) func();
+            if( $(this).hasClass("distance") ) obs.readDistance();
+            if( $(this).hasClass("bearing") ) obs.readBearing();
             calc.calc(true);
             event.preventDefault();
         }
@@ -171,6 +175,17 @@ LINZ.tcvalid.setKeypressHandler=function(element,calc,func)
         {
             calc.reset();
             event.preventDefault();
+        }
+        if( $(this).hasClass('distance') )
+        {
+            if( e.which == 76 || e.which == 108 )
+            {
+                obs.setLinks( true );
+            }
+            else if( e.which == 77 || e.which == 109 )
+            {
+                obs.setLinks( false );
+            }
         }
         if( ! e.ctrlKey && ! e.altKey && ! e.metaKey ) 
         {
@@ -208,24 +223,70 @@ LINZ.tcobs=function( prev_el, calc )
         });
     tcel.find(".reverse_button").click(function() { 
         obs.reverseBearing();
-        obs.bearing=obs.readBearing();
-        calc.calc();
         });
     tcel.find(".bearing").focusout(function(){ 
-        obs.bearing=obs.readBearing();
-        calc.calc(); 
+        obs.readBearing();
         });
     tcel.find(".distance").focusout(function(){ 
-        obs.distance=obs.readDistance();
-        calc.calc(); 
+        obs.readDistance();
+        });
+    tcel.find(".links_input").click(function(){ 
+        obs.toggleLinks();
         });
     LINZ.tcvalid.setKeypressHandler(tcel,calc,function(){ 
         obs.bearing=obs.readBearing();
         obs.distance=obs.readDistance();
-        calc.calc();
         });
     tcel.insertAfter(prev_el);
+    var prevobs=this.prevObs();
+    if( prevobs !== undefined ) this.setLinks( prevobs.isLinks() );
     return tcel;
+}
+
+LINZ.tcobs.prototype.nextObs=function()
+{
+    var obs=$("div.calculator").find(".obs_data");
+    var idx=obs.index(this.element);
+    if( idx >= 0 && idx < obs.length-1 )
+    {
+        return $(obs[idx+1]).data('obs');
+    }
+    return undefined;
+}
+
+LINZ.tcobs.prototype.prevObs=function()
+{
+    var obs=$("div.calculator").find(".obs_data");
+    var idx=obs.index(this.element);
+    if( idx > 0 )
+    {
+        return $(obs[idx-1]).data('obs');
+    }
+    return undefined;
+}
+
+LINZ.tcobs.prototype.isLinks=function()
+{
+    return this.element.find(".links_input").val() == "links";
+}
+
+LINZ.tcobs.prototype.toggleLinks=function()
+{
+    this.setLinks( ! this.isLinks() );
+}
+
+LINZ.tcobs.prototype.setLinks=function( islinks )
+{
+    this.element.find(".links_input").val(islinks ? "links" : "metres");
+    islinks = this.isLinks();
+    var delement=this.element.find(".distance");
+    if( islinks ) delement.addClass("links"); else delement.removeClass("links");
+    var nextobs=this.nextObs();
+    if( nextobs !== undefined && nextobs.distance === undefined )
+    {
+        nextobs.setLinks(this.isLinks());
+    }
+    this.readDistance();
 }
 
 LINZ.tcobs.bearing_string=function( deg, min, sec )
@@ -246,6 +307,7 @@ LINZ.tcobs.prototype.reverseBearing=function()
         while( deg >= 360 ){ deg -= 360; }
         belement.val(deg.toFixed(0) + match[2]);
     }
+    this.readBearing();
 }
 
 LINZ.tcobs.prototype.readBearing=function()
@@ -257,30 +319,37 @@ LINZ.tcobs.prototype.readBearing=function()
     if( btext == '' )
     {
         belement.removeClass("error");
-        return undefined;
-    }
-    var re=/^(\d{1,3})(?:\.([0-5]\d)(?:\.?([0-5]\d))?|\s+([0-5]\d)(?:\s+([0-5]\d))?)?$/;
-    var match;
-    var bearing=undefined;
-    if( match=btext.match(re) )
-    {
-        var deg=parseInt(match[1]);
-        var min=parseInt(match[2] || match[4] || '0');
-        var sec=parseInt(match[3] || match[5] || '0');
-        if( deg < 360 )
-        {
-            bearing=deg+min/60+sec/3600;
-        }
-        bprint.text(LINZ.tcobs.bearing_string(deg,min,sec));
-    }
-    if( bearing === undefined )
-    {
-        belement.addClass("error");
+        this.bearing=undefined;
     }
     else
     {
-        belement.removeClass("error");
+        var re=/^(\d{1,3})(?:\.([0-5]\d)(?:\.?([0-5]\d))?|\s+([0-5]\d)(?:\s+([0-5]\d))?)?$/;
+        var match;
+        var bearing=undefined;
+        if( match=btext.match(re) )
+        {
+            var deg=parseInt(match[1]);
+            var min=parseInt(match[2] || match[4] || '0');
+            var sec=parseInt(match[3] || match[5] || '0');
+            if( deg < 360 )
+            {
+                bearing=deg+min/60+sec/3600;
+            }
+            bprint.text(LINZ.tcobs.bearing_string(deg,min,sec));
+        }
+        if( bearing === undefined )
+        {
+            belement.addClass("error");
+        }
+        else
+        {
+            belement.removeClass("error");
+        }
+        belement.attr('title',bprint.text());
+        this.bearing=bearing;
     }
+    this.calc.calc();
+    this.calc.addEmptyRow();
     return bearing;
 }
 
@@ -288,8 +357,13 @@ LINZ.tcobs.prototype.readDistance=function()
 {
     var delement=this.element.find(".distance");
     var dprint=this.element.find(".print_dist");
-    var distance=LINZ.tcvalid.number(delement,dprint,config.dist_ndp);
-    return distance;
+    var islinks=this.isLinks();
+    var factor=islinks ? config.link_to_metre : 1.0;
+    this.distance=LINZ.tcvalid.number(delement,dprint,config.dist_ndp,undefined,factor);
+    delement.attr('title',dprint.text());
+    this.calc.calc()
+    this.calc.addEmptyRow();
+    return this.distance;
 }
 
 LINZ.tcobs.prototype.clearResults=function()
@@ -375,7 +449,7 @@ LINZ.tccalc.prototype.showHelp=function()
     }
 }
 
-LINZ.tccalc.prototype.addRow=function()
+LINZ.tccalc.prototype.addEmptyRow=function()
 {
     var lastobs=$(".obs_data").last();
     if( ! lastobs.data('obs').isblank() )
@@ -425,8 +499,6 @@ LINZ.tccalc.prototype.calc=function(bowditch)
         $("#total_area").text(total.totalArea().toFixed(config.area_ndp));
         $("div.area").show();
     }
-
-    this.addRow();
 }
 
 LINZ.tccalc.prototype.reset=function()

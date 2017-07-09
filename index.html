@@ -18,6 +18,8 @@
             in metres and bearings in degrees.
             </p>
             <p>
+            </p>
+            <p>
             The traverse can either close back to a start point, or run between two known
             coordinates.  The calculator uses the Bowditch method to distribute the 
             misclose along the traverse.  If it closes back to a start point then after
@@ -50,12 +52,25 @@
             <span class="error bearing">123 2 30</span>.  Rows with incorrect data are
             not used in the traverse calculation.
             </p>
-            <h2>Short cut keys</h2>
+            <h2>Distance units</h2>
             <p>
-            When entering distances and bearings then hitting the 'b' key will calculate
-            the Bowditch adjustment, and hitting the 'r' key will reset the form for another
-            calculation.
+            Distances can be entered as metres or links, though the calculations and printed 
+            output are always in metres.  To set the input unit to links click the 
+            <input tabindex="-1" type="button" value="metres" /> button. Click again to
+            set back to metres.  You can also use the &quot;m&quot; or &quot;l&quot; keys
+            when entering distances. Links distances are highlighted as 
+            <span class="distance links">123.4</span>.
             </p>
+            <h2>Data entry control</h2>
+            <p>
+            The following shortcut keys can be used when entering bearings and distances:
+            </p>
+            <table class="list">
+                <tr><td>b</td><td>Apply the Bowditch adjustment</td></tr>
+                <tr><td>r</td><td>Reset the form</td></tr>
+                <tr><td>l</td><td>(On distance entry) change units to links</td></tr>
+                <tr><td>m</td><td>(On distance entry) change units to metres</td></tr>
+            </table>
             <p>
             The buttons on the form are:
             </p>
@@ -120,6 +135,7 @@
                     <span class="printonly print_dist"></span> 
                 </td>
                 <td class="buttons">
+                    <input class="links_input noprint" tabindex="-1" type="button" value="metres" />
                     <input class="addrow_button" tabindex="-1" type="button" value="+" />
                     <input class="droprow_button" tabindex="-1" type="button" value="-" />
                 </td>
