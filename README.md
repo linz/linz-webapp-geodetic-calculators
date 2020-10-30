@@ -1,7 +1,16 @@
-traverse_calculator: Javascript traverse misclose calculator
-============================================================
+linz-webapp-traverse-calculator
+===============================
 
-This is a javascript survey traverse calculator running in a browser 
-written for survey staff to check the closure of traverse loops when looking at survey plans.
+Package to install the LINZ internal facing traverse calculator 
+application on to a server.
+This installs the files and places and apache configuration file 
+into /etc/linz/geodetic/apache/linz
 
-Supports entering angles in formats "DDD", "DDD MM", "DDD MM SS", "DDD.MM", "DDD.MMSS".  
+This assumes that the website will include a configuration command
+
+```
+  IncludeOptional /etc/linz/geodetic/apache/linz/*.conf
+```
+
+Alternatively it can be explicitly included by including the traverse-calculator.conf
+file from that directory in the configuration.

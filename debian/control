@@ -1,0 +1,12 @@
+Source: linz-webapp-traverse-calculator
+Section: science
+Priority: optional
+Maintainer: Chris Crook <ccrook@linz.govt.nz>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.2
+
+Package: linz-webapp-traverse-calculator
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Install the LINZ traverse-calculator web application
+ Installs the LINZ traverse-calculator web application. 
