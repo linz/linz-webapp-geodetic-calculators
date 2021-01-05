@@ -71,7 +71,7 @@ tryCalculate=function()
 
     output.append("Line scale factor: "+lsf.toFixed(6));
     output.append($("<br>"));
-    output.append("Projection correction: "+corrn.toFixed(4));
+    output.append("Projection correction: "+corrn.toFixed(4)+"m");
     $("#results").append(output);
 }
 
@@ -120,27 +120,6 @@ setup = function () {
         }, 4);
     });
     $('#calculate').click(tryCalculate);
-
-    // start_easting=new number_entry($('#start_easting'));
-    // end_easting=new number_entry($('#end_easting'));
-    // csd_distance=new number_entry($('#csd_distance'));
-
-    // setButtonStates();
-
-    // // $('input.coord-entry').each(function () { new CoordEntry($(this)) });
-
-    // CoordEntry.fieldConverted = addToHistory;
-
-
-    // $("#doconfig").click( showConfiguration);
-    // $("#cancelconfig").click(showConverter);
-    // $("#saveconfig").click(updateConfiguration);
-    // $("#showprev").click(showPrev);
-    // $("#shownext").click(showNext);
-    // $("#showhelp").click(function(){ window.location.href="help/index.html";});
-
-    // //Config.reload();
-    // //zmapconv.Config.apply();
     
     $('.nojs').hide();
     $('.needjs').show();
