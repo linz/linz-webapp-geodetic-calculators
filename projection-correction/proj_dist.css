@@ -1,0 +1,35 @@
+body {
+    font-size: 120%;
+    font-family: sans-serif;
+}
+
+/* div.entry-entry-box div, div.entry div
+{
+    display: inline
+} */
+
+div.entry-label, div.entry-value
+{
+    display: inline-block;
+    min-width: 12em;
+}
+
+div.entry-table
+{
+    display: inline-block;
+    margin: 10px;
+    padding: 10px;
+    background-color: #CCC;
+}
+
+input.easting, input.distance
+{
+    width:15em;
+    margin: 0 5px;
+}
+
+input.invalid
+{
+    background-color: lightpink;
+}
+

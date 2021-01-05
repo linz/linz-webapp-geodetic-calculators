@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Projection scale factor calculator</title>
+  <script src="jquery-1.10.1.min.js"></script>
+  <script src="tm2000_circuits.js"></script>
+  <script src="proj_dist.js"></script>
+  <link href="proj_dist.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <h1>Projection correction calculator</h1>
+  <div class="nojs">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h1>Incompatible browser</h1>
+        <p>
+          The projection distance calculator is not working in your browser. It may be that you
+          are using an incompatible browser (such as older versions of Internet Explorer),
+          or that you have disabled javascript in your browser.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Conversion -->
+  <div class="needjs"  style="display: none">
+      <p>
+          Specify the projection coordinate system, start and end eastings, and distance 
+          to calculate the projection scale factor and correction.  The end easting is optional
+            - if it is not specified then the start easting will be used.
+      </p>
+
+      <div class="entry-table" >
+
+        <div class="entry">
+          <div class="entry-label">
+            Projection coordinate system
+          </div>
+          <div class="entry-value">
+            <select id="coordsys" ></select> 
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-label">
+            Start node easting
+          </div>
+          <div class="entry-value">
+            <input id="start_easting" class="easting number_field"  type="text" />
+          </div>
+        </div>
+
+        <div class="entry">
+            <div class="entry-label">
+              End node easting
+            </div>
+            <div class="entry-value">
+              <input id="end_easting" class="easting number_field"  type="text" />
+            </div>
+          </div>
+
+          <div class="entry">
+            <div class="entry-label">
+              CSD distance
+            </div>
+            <div class="entry-value">
+              <input id="csd_distance" class="distance number_field"  type="text" />
+            </div>
+          </div>
+          
+          <div class="entry">
+              <div class="entry-label"></div>
+                <div class="entry-value">
+                    <input type="button" id="calculate" value="Calculate"/>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div id="results">
+
+    </div>
+
+  </div>
+</body>
+
+</html>
