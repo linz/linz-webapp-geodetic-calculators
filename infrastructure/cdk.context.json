@@ -1,0 +1,16 @@
+{
+  "load-balancer-listener:account=256884736311:listenerArn=arn$:aws$:elasticloadbalancing$:ap-southeast-2$:256884736311$:listener/app/WwwGeo-Admin-KSfPXVYQEbrs/dbc156ea3f74d701/d8cb037a3cf2b289:loadBalancerType=application:region=ap-southeast-2": {
+    "listenerArn": "arn:aws:elasticloadbalancing:ap-southeast-2:256884736311:listener/app/WwwGeo-Admin-KSfPXVYQEbrs/dbc156ea3f74d701/d8cb037a3cf2b289",
+    "listenerPort": 443,
+    "securityGroupIds": [
+      "sg-0df9a97be77dc4f2d"
+    ]
+  },
+  "security-group:account=256884736311:region=ap-southeast-2:securityGroupId=sg-0df9a97be77dc4f2d": {
+    "securityGroupId": "sg-0df9a97be77dc4f2d",
+    "allowAllOutbound": false
+  },
+  "acknowledged-issue-numbers": [
+    32775
+  ]
+}
