@@ -11,3 +11,19 @@ The calculators are:
 They are deployed using a lambda application load balancer (ALB) target.  The lambda function contains includes the application files which are simply passed back to the ALB listener in response to web request events.
 
 The infrastructure adds the ALB targets to the internal facing load balancer implemented by the [www-geodesy-common-infrastructure](https://github.com/linz/www-geodesy-common-infrastructure) deployment.
+
+## Deployment
+
+Standard CDK manual deployment.
+
+For nonprod:
+
+```sh
+ cd infrastructure && npx cdk deploy GeodeticCalculatorAppsStackNonprod
+```
+
+For production:
+
+```sh
+ cd infrastructure && npx cdk deploy GeodeticCalculatorAppsStackProd
+```
